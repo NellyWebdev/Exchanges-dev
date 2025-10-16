@@ -1,4 +1,4 @@
-import { Table, VStack, Text, Stack } from '@chakra-ui/react';
+import { VStack, Text, HStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 interface Order {
@@ -61,54 +61,41 @@ const OrderBook = () => {
 
   return (
     <VStack mt="100px" w="100%" h="100vh">
-      <Text fontSize="2xl" >
-       Order Book
-      </Text>
-      <Stack w={500}>
-        <Table.Root size="sm" w="100%" border={1}>
-          <Table.Header>
-            <Table.Row>
-              <Table.ColumnHeader color="red.400">Price</Table.ColumnHeader>
-              <Table.ColumnHeader color="red.400">Amount</Table.ColumnHeader>
-              <Table.ColumnHeader color="red.400" textAlign="end">
-                Total
-              </Table.ColumnHeader>
-            </Table.Row>
-          </Table.Header>
+      <Text fontSize="2xl">Order Book</Text>
 
-          <Table.Body>
-            {asks.slice(0, 17).map((ask, i) => (
-              <Table.Row key={i}>
-                <Table.Cell color="red.400">{ask.price.toFixed(5)}</Table.Cell>
-                <Table.Cell>{ask.amount.toFixed(5)}</Table.Cell>
-                <Table.Cell textAlign="end">{ask.total.toFixed(5)}</Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table.Root>
+      <VStack>
+        <VStack w={400}>
+          <HStack justify="space-between" w="100%">
+            <Text color="red.400" textAlign="left">Price</Text>
+            <Text color="red.400" textAlign="center">Amount</Text>
+            <Text color="red.400" textAlign="right">Total</Text>
+          </HStack>
 
-        <Table.Root size="sm" w="100%">
-          <Table.Header>
-            <Table.Row>
-              <Table.ColumnHeader color="green.400">Price</Table.ColumnHeader>
-              <Table.ColumnHeader color="green.400">Amount</Table.ColumnHeader>
-              <Table.ColumnHeader color="green.400" textAlign="end">
-                Total
-              </Table.ColumnHeader>
-            </Table.Row>
-          </Table.Header>
+          {asks.slice(0, 17).map((ask, i) => (
+            <HStack key={i} justify="space-between" w="100%">
+              <Text color="red.400" textAlign="left">{ask.price.toFixed(5)}</Text>
+              <Text textAlign="center">{ask.amount.toFixed(4)}</Text>
+              <Text textAlign="right">{ask.total.toFixed(5)}</Text>
+            </HStack>
+          ))}
+        </VStack>
 
-          <Table.Body>
-            {bids.slice(0, 17).map((bid, i) => (
-              <Table.Row key={i}>
-                <Table.Cell color="green.400">{bid.price.toFixed(2)}</Table.Cell>
-                <Table.Cell>{bid.amount.toFixed(5)}</Table.Cell>
-                <Table.Cell textAlign="end">{bid.total.toFixed(2)}</Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table.Root>
-      </Stack>
+        <VStack w={400}>
+          <HStack justify="space-between" w="100%">
+            <Text color="green.400" textAlign="left">Price</Text>
+            <Text color="green.400" textAlign="center">Amount</Text>
+            <Text color="green.400" textAlign="right">Total</Text>
+          </HStack>
+
+          {bids.slice(0, 17).map((bid, i) => (
+            <HStack key={i} justify="space-between" w="100%">
+              <Text color="green.400" textAlign="left">{bid.price.toFixed(2)}</Text>
+              <Text textAlign="center">{bid.amount.toFixed(4)}</Text>
+              <Text textAlign="right">{bid.total.toFixed(5)}</Text>
+            </HStack>
+          ))}
+        </VStack>
+      </VStack>
     </VStack>
   );
 };
