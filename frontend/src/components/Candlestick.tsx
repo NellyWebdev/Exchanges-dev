@@ -38,7 +38,7 @@ const Candlestick = () => {
       borderColor: '#71649C',
     });
 
-    const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@kline_1m');
+    const ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@kline_1s');
 
     ws.onopen = () => {
       console.log('Websocket connection opened');
